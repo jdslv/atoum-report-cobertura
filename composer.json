@@ -28,6 +28,9 @@
         "atoum/atoum": "^3.0",
         "atoum/reports-extension": "^3.0"
     },
+    "require-dev": {
+        "atoum/autoloop-extension": "^0.3.0"
+    },
     "config": {
         "sort-packages": true
     }

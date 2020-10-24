@@ -1,0 +1,34 @@
+{
+    "name": "jdslv/atoum-report-cobertura",
+    "description": "Cobertura report for atoum",
+    "type": "library",
+    "keywords": [
+        "TDD",
+        "atoum",
+        "test",
+        "unit testing",
+        "reports",
+        "atoum-extension",
+        "cobertura",
+        "gitlab"
+    ],
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "mageekguy\\atoum\\reports\\cobertura\\": "src/cobertura"
+        },
+        "files": [
+            "src/cobertura.php",
+            "configuration.php"
+        ]
+    },
+    "require": {
+        "php": ">=7.2.0",
+        "ext-xml": "*",
+        "atoum/atoum": "^3.0",
+        "atoum/reports-extension": "^3.0"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

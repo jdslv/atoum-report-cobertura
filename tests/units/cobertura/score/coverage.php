@@ -3,111 +3,11 @@
 namespace mageekguy\atoum\reports\cobertura\tests\units\score;
 
 use mageekguy\atoum;
+use mageekguy\atoum\reports\cobertura\tests\units\provider;
 
 class coverage extends atoum\test
 {
-    public function branchesData()
-    {
-        $branches = [];
-        $branchesCovered = $branchesTotal = 0;
-        $opsCovered = $opsTotal = 0;
-
-        $ops = [];
-
-        for ($idx = 0; $idx < 10; $idx++) {
-            $randOp = random_int(1, 5);
-            $hit = random_int(0, 1);
-
-            $branches[$opsTotal] = [
-                'op_start' => $opsTotal,
-                'op_end' => $opsTotal + $randOp,
-                'line_start' => 0,
-                'line_end' => 0,
-                'hit' => $hit,
-                'out' => [],
-                'out_hit' => [],
-            ];
-
-            for ($i = 0; $i <= $randOp; $i++) {
-                $branches[$opsTotal]['out'][] = random_int(1, 9);
-                $branches[$opsTotal]['out_hit'][] = $h = random_int(0, 1);
-
-                $branchesCovered += $h;
-                $branchesTotal++;
-            }
-
-            if ($hit) {
-                $ops = array_unique(array_merge($ops, range($opsTotal, $opsTotal + $randOp)));
-            }
-
-            $opsTotal += $randOp + 1;
-            $opsCovered = count($ops);
-        }
-
-        return [
-            $branches,
-            $branchesCovered,
-            $branchesTotal,
-            $opsCovered,
-            $opsTotal,
-        ];
-    }
-
-    public function linesData()
-    {
-        $lines = [];
-        $covered = $total = 0;
-
-        for ($idx = 0; $idx < 20; $idx++) {
-            $rand = random_int(0, 2);
-            $item = 1;
-
-            if ($rand) {
-                $item = $rand * -1;
-            }
-
-            if ($item > -2) {
-                $total++;
-            }
-
-            if ($item > 0) {
-                $covered++;
-            }
-
-            $lines[] = $item;
-        }
-
-        return [
-            $lines,
-            $covered,
-            $total,
-        ];
-    }
-
-    public function pathsData()
-    {
-        $paths = [];
-        $covered = $total = 0;
-
-        for ($idx = 0; $idx < 10; $idx++) {
-            $rand = random_int(1, 5);
-            $hit = random_int(0, 1);
-
-            $total++;
-            $covered += $hit;
-
-            $paths[] = [
-                'path' => range(0, $rand),
-                'hit' => $hit,
-            ];
-        }
-
-        return [
-            $paths,
-            $covered,
-            $total,
-        ];
-    }
+    use provider;
 
     public function test__construct()
     {
@@ -210,15 +110,7 @@ class coverage extends atoum\test
     {
         $this
             ->if($this->newTestedInstance)
-            ->and([$lines, $covered, $total] = $this->linesData())
-            ->and($filteredLines = [])
-            ->when(function() use ($lines, &$filteredLines) {
-                foreach ($lines as $lineNumber => $hit) {
-                    if ($hit > -2) {
-                        $filteredLines[$lineNumber] = $hit > 0;
-                    }
-                }
-            })
+            ->and([$lines, $covered, $total, $filteredLines] = $this->linesData())
             ->then
                 ->object($this->testedInstance->linesAreAvailable([]))
                     ->isTestedInstance

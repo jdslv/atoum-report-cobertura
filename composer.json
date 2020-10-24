@@ -22,6 +22,11 @@
             "configuration.php"
         ]
     },
+    "autoload-dev": {
+        "psr-4": {
+            "mageekguy\\atoum\\reports\\cobertura\\tests\\units\\": "tests/units/cobertura"
+        }
+    },
     "require": {
         "php": ">=7.2.0",
         "ext-xml": "*",

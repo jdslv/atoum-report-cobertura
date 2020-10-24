@@ -29,7 +29,8 @@
         "atoum/reports-extension": "^3.0"
     },
     "require-dev": {
-        "atoum/autoloop-extension": "^0.3.0"
+        "atoum/autoloop-extension": "^0.3.0",
+        "shulard/atoum-xml-extension": "^1.0"
     },
     "config": {
         "sort-packages": true

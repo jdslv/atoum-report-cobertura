@@ -12,3 +12,4 @@ $runner
     ->getExtension(mageekguy\atoum\autoloop\extension::class)
         ->setWatchedFiles([fullPath('src')])
 ;
+$runner->addExtension(new mageekguy\atoum\xml\extension($script));

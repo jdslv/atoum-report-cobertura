@@ -37,7 +37,7 @@ if (extension_loaded('xdebug') === true) {
         ;
         $runner->addReport($coverage);
     } else {
-        # coverage report
+        // coverage report
         $covFile = fullPath('reports', 'cobertura.xml');
         $path = pathinfo($covFile, PATHINFO_DIRNAME);
 
@@ -49,10 +49,19 @@ if (extension_loaded('xdebug') === true) {
         $cobertura->addWriter(new mageekguy\atoum\writers\file($covFile));
         $runner->addReport($cobertura);
 
-        # xunit report
+        // xunit report
         $xunitFile = fullPath('reports', 'junit.xml');
         $xunit = new mageekguy\atoum\reports\sonar\xunit();
         $xunit->addWriter(new mageekguy\atoum\writers\file($xunitFile));
         $runner->addReport($xunit);
+
+        // coveralls
+        $token = getenv('COVERALLS_TOKEN');
+
+        if ($token) {
+            $coveralls = new mageekguy\atoum\reports\asynchronous\coveralls('src', $token);
+            $coveralls->addWriter();
+            $runner->addReport($coveralls);
+        }
     }
 }

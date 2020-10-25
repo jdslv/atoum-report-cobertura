@@ -1,10 +1,13 @@
 
 # jdslv/atoum-report-cobertura
 
-[![Latest Stable Version](https://poser.pugx.org/jdslv/atoum-report-cobertura/v)](https://packagist.org/packages/jdslv/atoum-report-cobertura)
-[![Build Status](https://gitlab.com/jdslv/atoum-report-cobertura/badges/main/pipeline.svg)](https://gitlab.com/jdslv/atoum-report-cobertura/-/pipelines)
-[![Coverage Status](https://coveralls.io/repos/gitlab/jdslv/atoum-report-cobertura/badge.svg?branch=main)](https://coveralls.io/gitlab/jdslv/atoum-report-cobertura?branch=main)
-[![License](https://poser.pugx.org/jdslv/atoum-report-cobertura/license)](https://gitlab.com/jdslv/atoum-report-cobertura/-/blob/main/LICENSE)
+[![GitLab](https://img.shields.io/static/v1?message=GitLab&logo=gitlab&color=grey&label=)](https://gitlab.com/jdslv/atoum-report-cobertura)
+[![Latest stable version](https://img.shields.io/packagist/v/jdslv/atoum-report-cobertura)](https://packagist.org/packages/jdslv/atoum-report-cobertura)
+[![Build status](https://gitlab.com/jdslv/atoum-report-cobertura/badges/main/pipeline.svg)](https://gitlab.com/jdslv/atoum-report-cobertura/-/pipelines)
+[![Coverage status](https://coveralls.io/repos/gitlab/jdslv/atoum-report-cobertura/badge.svg?branch=main)](https://coveralls.io/gitlab/jdslv/atoum-report-cobertura?branch=main)
+![Minimal PHP version](https://img.shields.io/packagist/php-v/jdslv/atoum-report-cobertura)
+[![License](https://img.shields.io/packagist/l/jdslv/atoum-report-cobertura)](https://gitlab.com/jdslv/atoum-report-cobertura/-/blob/main/LICENSE)
+
 
 ## Install it
 

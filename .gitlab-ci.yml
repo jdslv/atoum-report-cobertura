@@ -1,0 +1,48 @@
+
+include:
+  - template: Security/SAST.gitlab-ci.yml
+  - template: Security/Secret-Detection.gitlab-ci.yml
+
+
+test:
+  stage: test
+
+  parallel:
+    matrix:
+      - PHP_VERSION:
+        - '7.2'
+        - '7.3'
+        - '7.4'
+
+  before_script:
+    - sh gitlab/ci/docker_install.sh
+    - composer install
+
+  image: php:${PHP_VERSION}-cli
+
+  script:
+    - ./vendor/bin/atoum
+
+  artifacts:
+    reports:
+      cobertura: reports/cobertura.xml
+      junit: reports/junit.xml
+
+  coverage: '/Code coverage value: \d+\.\d+/'
+
+
+phpcs:
+  stage: test
+
+  image: php:7.4-cli
+
+  before_script:
+    - sh gitlab/ci/docker_install.sh
+    - composer install
+
+  script:
+    - ./vendor/bin/phpcs --report=\\Satesh\\Phpcs\\GitLabReport --report-file=codequality.json
+
+  artifacts:
+    reports:
+      codequality: codequality.json

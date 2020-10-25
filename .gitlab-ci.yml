@@ -23,6 +23,9 @@ test:
   script:
     - ./vendor/bin/atoum
 
+  after_script:
+    - bash <(curl -s https://codecov.io/bash) -f reports/cobertura.xml
+
   artifacts:
     reports:
       cobertura: reports/cobertura.xml

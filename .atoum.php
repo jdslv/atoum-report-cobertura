@@ -56,27 +56,5 @@ if (extension_loaded('xdebug') === true) {
         $xunit = new mageekguy\atoum\reports\sonar\xunit();
         $xunit->addWriter(new mageekguy\atoum\writers\file($xunitFile));
         $runner->addReport($xunit);
-
-        // coveralls
-        $token = getenv('COVERALLS_TOKEN');
-
-        if ($token) {
-            $branch = getenv('CI_COMMIT_BRANCH');
-
-            $coveralls = new mageekguy\atoum\reports\asynchronous\coveralls($sourceDir, $token);
-            $coveralls
-                ->setServiceName('gitlab-ci')
-                ->setServiceJobId(getenv('CI_JOB_ID') ?: null)
-                ->addDefaultWriter()
-            ;
-
-            if ($branch) {
-                $coveralls->setBranchFinder(function () {
-                    return $branch;
-                });
-            }
-
-            $runner->addReport($coveralls);
-        }
     }
 }

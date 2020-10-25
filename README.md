@@ -1,5 +1,5 @@
 
-# jdslv/atoum-report-cobertura
+# jdslv/atoum-report-cobertura [![Build Status](https://gitlab.com/jdslv/atoum-report-cobertura/badges/main/pipeline.svg)](https://gitlab.com/jdslv/atoum-report-cobertura)[![Coveraga](https://gitlab.com/jdslv/atoum-report-cobertura/badges/main/coverage.svg)](https://gitlab.com/jdslv/atoum-report-cobertura)
 
 ## Install it
 

@@ -1,5 +1,10 @@
 
-# jdslv/atoum-report-cobertura [![Build Status](https://gitlab.com/jdslv/atoum-report-cobertura/badges/main/pipeline.svg)](https://gitlab.com/jdslv/atoum-report-cobertura)[![Coveraga](https://gitlab.com/jdslv/atoum-report-cobertura/badges/main/coverage.svg)](https://gitlab.com/jdslv/atoum-report-cobertura)
+# jdslv/atoum-report-cobertura
+
+[![Latest Stable Version](https://poser.pugx.org/jdslv/atoum-report-cobertura/v)](https://packagist.org/packages/jdslv/atoum-report-cobertura)
+[![Build Status](https://gitlab.com/jdslv/atoum-report-cobertura/badges/main/pipeline.svg)](https://gitlab.com/jdslv/atoum-report-cobertura/-/pipelines)
+[![Coverage Status](https://coveralls.io/repos/gitlab/jdslv/atoum-report-cobertura/badge.svg?branch=main)](https://coveralls.io/gitlab/jdslv/atoum-report-cobertura?branch=main)
+[![License](https://poser.pugx.org/jdslv/atoum-report-cobertura/license)](https://gitlab.com/jdslv/atoum-report-cobertura/-/blob/main/LICENSE)
 
 ## Install it
 

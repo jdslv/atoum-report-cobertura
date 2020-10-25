@@ -13,15 +13,16 @@ $runner
 $runner->addExtension(new mageekguy\atoum\xml\extension($script));
 
 
+// Show default report
+$script->addDefaultReport();
+
+
 # reports
 if (extension_loaded('xdebug') === true) {
     $script->enableBranchAndPathCoverage();
     $script->noCodeCoverageInDirectories(fullPath('vendor'));
 
     if (!getenv('CI')) {
-        // Show default report
-        $script->addDefaultReport();
-
         $path = fullPath('reports', 'coverage');
 
         if (!is_dir($path)) {

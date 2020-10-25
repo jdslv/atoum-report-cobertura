@@ -23,10 +23,21 @@ class klass extends atoum\test
             ->and($base = dirname(__DIR__, 4))
             ->then
                 ->string($this->testedInstance->getFileName())
-                    ->isIdenticalTo(implode(DIRECTORY_SEPARATOR, [$base, 'src', 'cobertura', 'reflection', 'klass.php']))
+                    ->isIdenticalTo(implode(DIRECTORY_SEPARATOR, [
+                        $base,
+                        'src',
+                        'cobertura',
+                        'reflection',
+                        'klass.php',
+                    ]))
 
                 ->string($this->testedInstance->getFileName($base))
-                    ->isIdenticalTo(implode(DIRECTORY_SEPARATOR, ['src', 'cobertura', 'reflection', 'klass.php']))
+                    ->isIdenticalTo(implode(DIRECTORY_SEPARATOR, [
+                        'src',
+                        'cobertura',
+                        'reflection',
+                        'klass.php',
+                    ]))
         ;
     }
 }

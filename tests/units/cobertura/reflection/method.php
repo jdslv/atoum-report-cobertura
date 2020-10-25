@@ -77,6 +77,7 @@ class method extends atoum\test
 
     public function testGetShortSignature()
     {
+        // phpcs:disable
         $class = new class {
             public function method1() {}
             public function method2($a) {}
@@ -95,6 +96,7 @@ class method extends atoum\test
             public function method15($a = \PHP_INT_MAX) {}
             public function method16(callable $name) {}
         };
+        // phpcs:enable
 
         $this
             ->string($this->newTestedInstance($class, 'method1')->getShortSignature())
@@ -134,7 +136,10 @@ class method extends atoum\test
                 ->isIdenticalTo('method12(mageekguy\atoum\reports\cobertura\reflection\klass $a): ?DateTime')
 
             ->string($this->newTestedInstance($class, 'method13')->getShortSignature())
-                ->isIdenticalTo('method13(mageekguy\atoum\reports\cobertura\reflection\klass ...$a): mageekguy\atoum\reports\cobertura\reflection\klass')
+                ->isIdenticalTo(vsprintf('method13(%s ...$a): %s', [
+                    cobertura\reflection\klass::class,
+                    cobertura\reflection\klass::class,
+                ]))
 
             ->string($this->newTestedInstance($class, 'method14')->getShortSignature())
                 ->isIdenticalTo('method14(&...$a)')
@@ -149,6 +154,7 @@ class method extends atoum\test
 
     public function testGetSignature()
     {
+        // phpcs:disable
         $class = new class {
             public function method1() {}
             public function method2($a) {}
@@ -167,6 +173,7 @@ class method extends atoum\test
             public function method15($a = \PHP_INT_MAX) {}
             public function method16(callable $name) {}
         };
+        // phpcs:enable
 
         $this
             ->string($this->newTestedInstance($class, 'method1')->getSignature())
@@ -219,7 +226,10 @@ class method extends atoum\test
 
             ->string($this->newTestedInstance($class, 'method13')->getSignature())
                 ->startWith('class@anonymous')
-                ->endWith('::method13(mageekguy\atoum\reports\cobertura\reflection\klass ...$a): mageekguy\atoum\reports\cobertura\reflection\klass')
+                ->endWith(vsprintf('::method13(%s ...$a): %s', [
+                    cobertura\reflection\klass::class,
+                    cobertura\reflection\klass::class,
+                ]))
 
             ->string($this->newTestedInstance($class, 'method14')->getSignature())
                 ->startWith('class@anonymous')

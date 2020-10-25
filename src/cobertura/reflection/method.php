@@ -81,13 +81,13 @@ class method extends ReflectionMethod
 
                 if ($parameter->isDefaultValueConstant()) {
                     $parts[] = $parameter->getDefaultValueConstantName();
-                } else if ($parameter->allowsNull()) {
+                } elseif ($parameter->allowsNull()) {
                     $parts[] = 'null';
-                } else if ($parameter->isArray()) {
+                } elseif ($parameter->isArray()) {
                     $parts[] = '[]';
-                } else if (is_bool($default)) {
+                } elseif (is_bool($default)) {
                     $parts[] = $default ? 'true' : 'false';
-                } else if (is_int($default) || is_float($default)) {
+                } elseif (is_int($default) || is_float($default)) {
                     $parts[] = $default;
                 } else {
                     $parts[] = sprintf("'%s'", $default);

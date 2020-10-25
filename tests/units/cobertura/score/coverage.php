@@ -221,11 +221,13 @@ class coverage extends atoum\test
 
             ->and($this->function->call_user_func = uniqid())
 
+            // phpcs:disable
             ->if($callable = 'get_class')
             ->if($closure = function () {})
             ->and($class = new class {
                 public function method() {}
             })
+            // phpcs:enable
 
             ->if($this->newTestedInstance)
             ->then

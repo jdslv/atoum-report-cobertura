@@ -15,7 +15,7 @@ test:
         - '7.4'
 
   before_script:
-    - sh gitlab/ci/docker_install.sh
+    - sh .gitlab/ci/docker_install.sh
     - composer install --no-progress
 
   image: php:${PHP_VERSION}-cli
@@ -37,7 +37,7 @@ phpcs:
   image: php:7.4-cli
 
   before_script:
-    - sh gitlab/ci/docker_install.sh
+    - sh .gitlab/ci/docker_install.sh
     - composer install --no-progress
 
   script:

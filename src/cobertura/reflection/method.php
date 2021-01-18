@@ -108,6 +108,12 @@ class method extends ReflectionMethod
 
         $type = $this->getReturnType();
 
-        return ': ' . ($type->allowsNull() ? '?' : '') . $type;
+        if (is_object($type) && method_exists($type, 'getName')) {
+            $name = $type->getName();
+        } else {
+            $name = (string) $type;
+        }
+
+        return ': ' . ($type->allowsNull() ? '?' : '') . $name;
     }
 }

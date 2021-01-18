@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Fix test with xdebug 3
+- Prevent `ReflectionType::__toString() is deprecated` message
 
 
 ## [1.0.0] - 2020-10-25

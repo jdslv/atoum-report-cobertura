@@ -69,7 +69,13 @@ class method extends ReflectionMethod
             $name .= '$' . $parameter->getName();
 
             if ($parameter->hasType()) {
-                $parts[] = (string) $parameter->getType();
+                $type = $parameter->getType();
+
+                if (is_object($type) && method_exists($type, 'getName')) {
+                    $parts[] = $type->getName();
+                } else {
+                    $parts[] = (string) $type;
+                }
             }
 
             $parts[] = $name;

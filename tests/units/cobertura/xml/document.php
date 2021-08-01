@@ -16,13 +16,12 @@ class document extends atoum\atoum\test
     {
         $this
             ->xml((string) $this->newTestedInstance)
-                ->xpath('/coverage')
-                    ->hasSize(1)
-                    ->item(0)
-                        ->attributes()
-                            ->hasSize(2)
-                            ->string['version']->isIdenticalTo('1.0')
-                            ->string['timestamp']
+                ->root
+                    ->attributes
+                        ->hasSize(2)
+                        ->hasKeys(['timestamp', 'version'])
+                        ->string['version']
+                            ->isIdenticalTo('1.0')
         ;
     }
 
@@ -45,103 +44,107 @@ class document extends atoum\atoum\test
             ->then
                 ->object($this->testedInstance->addMethod($method, $score))
                     ->isTestedInstance
+
+                ->xml((string) $this->testedInstance)
+                    ->nodes // Packages
+                        ->hasSize(1)
+                        ->first
+                            ->isTag('packages')
+                            ->attributes
+                                ->hasSize(0)
+
+                    ->nodes // Package
+                        ->hasSize(1)
+                        ->first
+                            ->isTag('package')
+                            ->attributes
+                                ->hasSize(4)
+                                ->string['name']->isIdenticalTo(atoum\atoum\reports\cobertura\xml::class)
+                                ->string['branch-rate']->isIdenticalTo($branchRate)
+                                ->string['line-rate']->isIdenticalTo($lineRate)
+                                ->string['complexity']->isIdenticalTo('0')
+
+                    ->nodes // Classes
+                        ->hasSize(1)
+                        ->first
+                            ->isTag('classes')
+                            ->attributes
+                                ->hasSize(0)
+
+                    ->nodes // Class
+                        ->hasSize(1)
+                        ->first
+                            ->isTag('class')
+                            ->attributes
+                                ->hasSize(5)
+                                ->string['name']->isIdenticalTo('document')
+                                ->string['filename']->isIdenticalTo('src/cobertura/xml/document.php')
+                                ->string['branch-rate']->isIdenticalTo($branchRate)
+                                ->string['line-rate']->isIdenticalTo($lineRate)
+                                ->string['complexity']->isIdenticalTo('0')
+
+                    ->nodes // Methods
+                        ->hasSize(1)
+                        ->first
+                            ->isTag('methods')
+                            ->attributes
+                                ->hasSize(0)
+
+                    ->nodes // Method
+                        ->hasSize(1)
+                        ->first
+                            ->isTag('method')
+                            ->attributes
+                                ->hasSize(5)
+                                ->string['name']
+                                    ->isIdenticalTo('addMethod')
+                                ->string['signature']
+                                    ->isIdenticalTo(vsprintf('%s::%s(%s $method, %s $coverage): self', [
+                                        testedClass::class,
+                                        'addMethod',
+                                        reflection\method::class,
+                                        score\coverage::class,
+                                    ]))
+                                ->string['branch-rate']
+                                    ->isIdenticalTo($branchRate)
+                                ->string['line-rate']
+                                    ->isIdenticalTo($lineRate)
+                                ->string['complexity']
+                                    ->isIdenticalTo('0')
+
+                    ->nodes // Lines
+                        ->hasSize(1)
+                        ->first
+                            ->isTag('lines')
+                            ->attributes
+                                ->hasSize(0)
         ;
 
-        // Split forced by xml extension
-
-        $xml = $this->xml((string) $this->testedInstance);
-
-        // Packages
-        $xml
-            ->xpath('//packages')
-                ->hasSize(1)
-                ->item(0)
-                    ->attributes()
-                        ->hasSize(0)
+        $line = $this
+            ->xml((string) $this->testedInstance)
+                ->nodes // Packages
+                    ->nodes // Package
+                        ->nodes // Classes
+                            ->nodes // Class
+                                ->nodes // Methods
+                                    ->nodes // Method
+                                        ->nodes // Lines
+                                            ->nodes // Line
+                                                ->hasSize(count($filteredLines))
         ;
 
-        $xml
-            ->xpath('//packages/package')
-                ->hasSize(1)
-                ->item(0)
-                    ->attributes()
-                        ->hasSize(4)
-                        ->string['name']->isIdenticalTo('atoum\atoum\reports\cobertura\xml')
-                        ->string['branch-rate']->isIdenticalTo($branchRate)
-                        ->string['line-rate']->isIdenticalTo($lineRate)
-                        ->string['complexity']->isIdenticalTo('0')
-        ;
-
-        // Classes
-        $xml
-            ->xpath('//packages/package/classes')
-                ->hasSize(1)
-                ->item(0)
-                    ->attributes()
-                        ->hasSize(0)
-        ;
-
-        $xml
-            ->xpath('//packages/package/classes/class')
-                ->hasSize(1)
-                ->item(0)
-                    ->attributes()
-                        ->hasSize(5)
-                        ->string['name']->isIdenticalTo('document')
-                        ->string['filename']->isIdenticalTo('src/cobertura/xml/document.php')
-                        ->string['branch-rate']->isIdenticalTo($branchRate)
-                        ->string['line-rate']->isIdenticalTo($lineRate)
-                        ->string['complexity']->isIdenticalTo('0')
-        ;
-
-        // Methodes
-        $xml
-            ->xpath('//packages/package/classes/class/methods')
-                ->hasSize(1)
-                ->item(0)
-                    ->attributes()
-                        ->hasSize(0)
-        ;
-
-        $xml
-            ->xpath('//packages/package/classes/class/methods/method')
-                ->hasSize(1)
-                ->item(0)
-                    ->attributes()
-                        ->hasSize(5)
-                        ->string['name']->isIdenticalTo('addMethod')
-                        ->string['signature']->isIdenticalTo(vsprintf('%s::addMethod(%s $method, %s $coverage): self', [
-                            testedClass::class,
-                            reflection\method::class,
-                            score\coverage::class,
-                        ]))
-                        ->string['branch-rate']->isIdenticalTo($branchRate)
-                        ->string['line-rate']->isIdenticalTo($lineRate)
-                        ->string['complexity']->isIdenticalTo('0')
-        ;
-
-        // Lines
-        $xml
-            ->xpath('//packages/package/classes/class/methods/method/lines')
-                ->hasSize(1)
-                ->item(0)
-                    ->attributes()
-                        ->hasSize(0)
-        ;
-
-        $linesElements = $xml
-            ->xpath('//packages/package/classes/class/methods/method/lines/line')
-                ->hasSize(count($filteredLines))
-        ;
-
-        $idx = 0;
         foreach ($filteredLines as $lineNumber => $hit) {
-            $linesElements
-                ->item($idx++)
-                    ->attributes()
+            $line
+                ->next
+                    ->isTag('line')
+                    ->attributes
                         ->hasSize(2)
-                        ->string['number']->isEqualTo($lineNumber)
-                        ->string['hits']->isEqualTo($hit)
+                        ->hasKeys(['number', 'hits'])
+
+                        ->string['number']
+                            ->isEqualTo($lineNumber)
+                        ->string['hits']
+                            ->isEqualTo($hit)
             ;
         }
     }
@@ -156,60 +159,69 @@ class document extends atoum\atoum\test
             ->then
                 ->object($this->testedInstance->addSource($path1, $path2))
                     ->isTestedInstance
+
+                ->xml((string) $this->testedInstance)
+                    ->nodes // Sources
+                        ->hasSize(1)
+                        ->first
+                        ->isTag('sources')
+                            ->attributes
+                                ->hasSize(0)
+
+                    ->nodes // Source
+                        ->hasSize(2)
+                        ->first
+                            ->isTag('source')
+                            ->attributes
+                                ->isEmpty
+                            ->content
+                                ->isIdenticalTo($path1)
+                        ->next
+                            ->isTag('source')
+                            ->attributes
+                                ->isEmpty
+                            ->content
+                                ->isIdenticalTo($path2)
+
+                ->object($this->testedInstance->addSource($path3))
+                    ->isTestedInstance
+
+                ->xml((string) $this->testedInstance)
+                    ->nodes // Sources
+                        ->nodes // Source
+                            ->hasSize(3)
+                            ->first
+                                ->isTag('source')
+                                ->attributes
+                                    ->isEmpty
+                                ->content
+                                    ->isIdenticalTo($path1)
+                            ->next
+                                ->isTag('source')
+                                ->attributes
+                                    ->isEmpty
+                                ->content
+                                    ->isIdenticalTo($path2)
+                            ->next
+                                ->isTag('source')
+                                ->attributes
+                                    ->isEmpty
+                                ->content
+                                    ->isIdenticalTo($path3)
         ;
-
-        // Split forced by xml extension
-
-        $xml = $this->xml((string) $this->testedInstance);
-
-        $xml
-            ->xpath('//sources')
-                ->hasSize(1)
-                ->item(0)
-                    ->attributes()
-                        ->hasSize(0)
-        ;
-
-        $source = $xml->xpath('//sources/source')->hasSize(2);
-
-        $source->item(0)->attributes()->hasSize(0);
-        $source->item(0)->nodeValue->isIdenticalTo($path1);
-        $source->item(1)->attributes()->hasSize(0);
-        $source->item(1)->nodeValue->isIdenticalTo($path2);
-
-        $this->testedInstance->addSource($path3);
-
-        $xml = $this->xml((string) $this->testedInstance);
-
-        $xml
-            ->xpath('//sources')
-                ->hasSize(1)
-                ->item(0)
-                    ->attributes()
-                        ->hasSize(0)
-        ;
-
-        $source = $xml->xpath('//sources/source')->hasSize(3);
-
-        $source->item(0)->attributes()->hasSize(0);
-        $source->item(0)->nodeValue->isIdenticalTo($path1);
-        $source->item(1)->attributes()->hasSize(0);
-        $source->item(1)->nodeValue->isIdenticalTo($path2);
-        $source->item(2)->attributes()->hasSize(0);
-        $source->item(2)->nodeValue->isIdenticalTo($path3);
     }
 
     public function testToXML()
     {
         $this
             ->xml($this->newTestedInstance->toXML())
-                ->xpath('/coverage')
-                    ->hasSize(1)
-                    ->item(0)
-                        ->attributes()
-                            ->hasSize(2)
-                            ->string['version']->isIdenticalTo('1.0')
-                            ->string['timestamp']
+                ->root
+                    ->isTag('coverage')
+                    ->attributes
+                        ->hasSize(2)
+                        ->hasKeys(['timestamp', 'version'])
+                        ->string['version']
+                            ->isIdenticalTo('1.0')
         ;
     }
 }

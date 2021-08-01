@@ -41,7 +41,7 @@ test:
 phpcs:
   stage: test
 
-  image: php:7.4-cli
+  image: php:8.0-cli
 
   before_script:
     - sh .gitlab/ci/docker_install.sh

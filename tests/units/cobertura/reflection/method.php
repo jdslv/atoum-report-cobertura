@@ -2,13 +2,13 @@
 
 namespace atoum\atoum\reports\cobertura\tests\units\reflection;
 
-use atoum\atoum;
+use atoum;
 use atoum\atoum\reports\cobertura;
 use atoum\atoum\reports\cobertura\reflection\method as testedClass;
 use ReflectionClass;
 use ReflectionMethod;
 
-class method extends atoum\test
+class method extends atoum\atoum\test
 {
     public function testClass()
     {

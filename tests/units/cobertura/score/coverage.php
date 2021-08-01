@@ -2,10 +2,10 @@
 
 namespace atoum\atoum\reports\cobertura\tests\units\score;
 
-use atoum\atoum;
+use atoum;
 use atoum\atoum\reports\cobertura\tests\units\provider;
 
-class coverage extends atoum\test
+class coverage extends atoum\atoum\test
 {
     use provider;
 

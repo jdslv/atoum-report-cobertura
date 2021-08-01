@@ -2,23 +2,23 @@
 
 namespace atoum\atoum\reports\cobertura\tests\units;
 
-use atoum\atoum;
+use atoum;
 use mock;
 
-class extension extends atoum\test
+class extension extends atoum\atoum\test
 {
     public function testClass()
     {
         $this
             ->testedClass
-                ->extends(atoum\reports\extension::class)
+                ->extends(atoum\atoum\reports\extension::class)
         ;
     }
 
     public function test__construct()
     {
         $this
-            ->given($runner = new atoum\scripts\runner(uniqid()))
+            ->given($runner = new atoum\atoum\scripts\runner(uniqid()))
             ->and($parser = new mock\atoum\atoum\script\arguments\parser())
             ->and($runner->setArgumentsParser($parser))
 

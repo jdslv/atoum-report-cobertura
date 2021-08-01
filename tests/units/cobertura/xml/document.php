@@ -2,13 +2,13 @@
 
 namespace atoum\atoum\reports\cobertura\tests\units\xml;
 
-use atoum\atoum;
+use atoum;
 use atoum\atoum\reports\cobertura\reflection;
 use atoum\atoum\reports\cobertura\score;
 use atoum\atoum\reports\cobertura\tests\units\provider;
 use atoum\atoum\reports\cobertura\xml\document as testedClass;
 
-class document extends atoum\test
+class document extends atoum\atoum\test
 {
     use provider;
 

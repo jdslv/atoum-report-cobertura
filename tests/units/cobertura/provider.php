@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace mageekguy\atoum\reports\cobertura\tests\units;
+namespace atoum\atoum\reports\cobertura\tests\units;
 
 trait provider
 {

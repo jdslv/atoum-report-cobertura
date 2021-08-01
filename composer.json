@@ -16,7 +16,7 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "mageekguy\\atoum\\reports\\cobertura\\": "src/cobertura"
+            "atoum\\atoum\\reports\\cobertura\\": "src/cobertura"
         },
         "files": [
             "src/cobertura.php",
@@ -25,7 +25,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "mageekguy\\atoum\\reports\\cobertura\\tests\\units\\": "tests/units/cobertura"
+            "atoum\\atoum\\reports\\cobertura\\tests\\units\\": "tests/units/cobertura"
         }
     },
     "require": {

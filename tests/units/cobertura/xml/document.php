@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace mageekguy\atoum\reports\cobertura\tests\units\xml;
+namespace atoum\atoum\reports\cobertura\tests\units\xml;
 
-use mageekguy\atoum;
-use mageekguy\atoum\reports\cobertura\reflection;
-use mageekguy\atoum\reports\cobertura\score;
-use mageekguy\atoum\reports\cobertura\tests\units\provider;
-use mageekguy\atoum\reports\cobertura\xml\document as testedClass;
+use atoum\atoum;
+use atoum\atoum\reports\cobertura\reflection;
+use atoum\atoum\reports\cobertura\score;
+use atoum\atoum\reports\cobertura\tests\units\provider;
+use atoum\atoum\reports\cobertura\xml\document as testedClass;
 
 class document extends atoum\test
 {
@@ -66,7 +66,7 @@ class document extends atoum\test
                 ->item(0)
                     ->attributes()
                         ->hasSize(4)
-                        ->string['name']->isIdenticalTo('mageekguy\atoum\reports\cobertura\xml')
+                        ->string['name']->isIdenticalTo('atoum\atoum\reports\cobertura\xml')
                         ->string['branch-rate']->isIdenticalTo($branchRate)
                         ->string['line-rate']->isIdenticalTo($lineRate)
                         ->string['complexity']->isIdenticalTo('0')

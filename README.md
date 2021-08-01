@@ -28,8 +28,8 @@ Add the following code to your configuration file:
 
 // .atoum.php
 
-$cobertura = new \mageekguy\atoum\reports\cobertura();
-$writer = new \mageekguy\atoum\writers\file('./cobertura.xml');
+$cobertura = new \atoum\atoum\reports\cobertura();
+$writer = new \atoum\atoum\writers\file('./cobertura.xml');
 $cobertura->addWriter($writer);
 $runner->addReport($cobertura);
 ```

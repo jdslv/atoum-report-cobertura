@@ -2,7 +2,7 @@
 
 namespace atoum\reports\tests\units;
 
-use mageekguy\atoum;
+use atoum\atoum;
 
 class cobertura extends atoum\test
 {

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace mageekguy\atoum\reports\cobertura\reflection;
+namespace atoum\atoum\reports\cobertura\reflection;
 
 use ReflectionMethod;
 

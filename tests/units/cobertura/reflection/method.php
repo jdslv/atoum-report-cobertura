@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace mageekguy\atoum\reports\cobertura\tests\units\reflection;
+namespace atoum\atoum\reports\cobertura\tests\units\reflection;
 
-use mageekguy\atoum;
-use mageekguy\atoum\reports\cobertura;
-use mageekguy\atoum\reports\cobertura\reflection\method as testedClass;
+use atoum\atoum;
+use atoum\atoum\reports\cobertura;
+use atoum\atoum\reports\cobertura\reflection\method as testedClass;
 use ReflectionClass;
 use ReflectionMethod;
 
@@ -133,7 +133,7 @@ class method extends atoum\test
                 ->isIdenticalTo('method11(stdObject $a): string')
 
             ->string($this->newTestedInstance($class, 'method12')->getShortSignature())
-                ->isIdenticalTo('method12(mageekguy\atoum\reports\cobertura\reflection\klass $a): ?DateTime')
+                ->isIdenticalTo('method12(atoum\atoum\reports\cobertura\reflection\klass $a): ?DateTime')
 
             ->string($this->newTestedInstance($class, 'method13')->getShortSignature())
                 ->isIdenticalTo(vsprintf('method13(%s ...$a): %s', [
@@ -222,7 +222,7 @@ class method extends atoum\test
 
             ->string($this->newTestedInstance($class, 'method12')->getSignature())
                 ->startWith('class@anonymous')
-                ->endWith('::method12(mageekguy\atoum\reports\cobertura\reflection\klass $a): ?DateTime')
+                ->endWith('::method12(atoum\atoum\reports\cobertura\reflection\klass $a): ?DateTime')
 
             ->string($this->newTestedInstance($class, 'method13')->getSignature())
                 ->startWith('class@anonymous')

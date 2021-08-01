@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace mageekguy\atoum\reports\cobertura\tests\units;
+namespace atoum\atoum\reports\cobertura\tests\units;
 
-use mageekguy\atoum;
+use atoum\atoum;
 use mock;
 
 class extension extends atoum\test
@@ -19,10 +19,10 @@ class extension extends atoum\test
     {
         $this
             ->given($runner = new atoum\scripts\runner(uniqid()))
-            ->and($parser = new mock\mageekguy\atoum\script\arguments\parser())
+            ->and($parser = new mock\atoum\atoum\script\arguments\parser())
             ->and($runner->setArgumentsParser($parser))
 
-            ->if($configurator = new mock\mageekguy\atoum\configurator($runner))
+            ->if($configurator = new mock\atoum\atoum\configurator($runner))
             ->then
                 ->object($this->newTestedInstance())
 

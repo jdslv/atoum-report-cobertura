@@ -46,14 +46,14 @@ class document extends atoum\atoum\test
                     ->isTestedInstance
 
                 ->xml((string) $this->testedInstance)
-                    ->nodes // Packages
+                    ->xpath('//packages')
                         ->hasSize(1)
                         ->first
                             ->isTag('packages')
                             ->attributes
                                 ->hasSize(0)
 
-                    ->nodes // Package
+                    ->xpath('//packages/package')
                         ->hasSize(1)
                         ->first
                             ->isTag('package')
@@ -64,14 +64,14 @@ class document extends atoum\atoum\test
                                 ->string['line-rate']->isIdenticalTo($lineRate)
                                 ->string['complexity']->isIdenticalTo('0')
 
-                    ->nodes // Classes
+                    ->xpath('//packages/package/classes')
                         ->hasSize(1)
                         ->first
                             ->isTag('classes')
                             ->attributes
                                 ->hasSize(0)
 
-                    ->nodes // Class
+                    ->xpath('//packages/package/classes/class')
                         ->hasSize(1)
                         ->first
                             ->isTag('class')
@@ -83,14 +83,14 @@ class document extends atoum\atoum\test
                                 ->string['line-rate']->isIdenticalTo($lineRate)
                                 ->string['complexity']->isIdenticalTo('0')
 
-                    ->nodes // Methods
+                    ->xpath('//packages/package/classes/class/methods')
                         ->hasSize(1)
                         ->first
                             ->isTag('methods')
                             ->attributes
                                 ->hasSize(0)
 
-                    ->nodes // Method
+                    ->xpath('//packages/package/classes/class/methods/method')
                         ->hasSize(1)
                         ->first
                             ->isTag('method')
@@ -112,7 +112,7 @@ class document extends atoum\atoum\test
                                 ->string['complexity']
                                     ->isIdenticalTo('0')
 
-                    ->nodes // Lines
+                    ->xpath('//packages/package/classes/class/methods/method/lines')
                         ->hasSize(1)
                         ->first
                             ->isTag('lines')
@@ -122,15 +122,8 @@ class document extends atoum\atoum\test
 
         $line = $this
             ->xml((string) $this->testedInstance)
-                ->nodes // Packages
-                    ->nodes // Package
-                        ->nodes // Classes
-                            ->nodes // Class
-                                ->nodes // Methods
-                                    ->nodes // Method
-                                        ->nodes // Lines
-                                            ->nodes // Line
-                                                ->hasSize(count($filteredLines))
+                ->xpath('//packages/package/classes/class/methods/method/lines/line')
+                    ->hasSize(count($filteredLines))
         ;
 
         foreach ($filteredLines as $lineNumber => $hit) {
@@ -161,14 +154,14 @@ class document extends atoum\atoum\test
                     ->isTestedInstance
 
                 ->xml((string) $this->testedInstance)
-                    ->nodes // Sources
+                    ->xpath('//sources')
                         ->hasSize(1)
                         ->first
                         ->isTag('sources')
                             ->attributes
                                 ->hasSize(0)
 
-                    ->nodes // Source
+                    ->xpath('//sources/source')
                         ->hasSize(2)
                         ->first
                             ->isTag('source')
@@ -187,27 +180,26 @@ class document extends atoum\atoum\test
                     ->isTestedInstance
 
                 ->xml((string) $this->testedInstance)
-                    ->nodes // Sources
-                        ->nodes // Source
-                            ->hasSize(3)
-                            ->first
-                                ->isTag('source')
-                                ->attributes
-                                    ->isEmpty
-                                ->content
-                                    ->isIdenticalTo($path1)
-                            ->next
-                                ->isTag('source')
-                                ->attributes
-                                    ->isEmpty
-                                ->content
-                                    ->isIdenticalTo($path2)
-                            ->next
-                                ->isTag('source')
-                                ->attributes
-                                    ->isEmpty
-                                ->content
-                                    ->isIdenticalTo($path3)
+                    ->xpath('//sources/source')
+                        ->hasSize(3)
+                        ->first
+                            ->isTag('source')
+                            ->attributes
+                                ->isEmpty
+                            ->content
+                                ->isIdenticalTo($path1)
+                        ->next
+                            ->isTag('source')
+                            ->attributes
+                                ->isEmpty
+                            ->content
+                                ->isIdenticalTo($path2)
+                        ->next
+                            ->isTag('source')
+                            ->attributes
+                                ->isEmpty
+                            ->content
+                                ->isIdenticalTo($path3)
         ;
     }
 

@@ -1,7 +1,7 @@
 {
     "name": "jdslv/atoum-report-cobertura",
     "description": "Cobertura report for atoum",
-    "version": "1.0.2",
+    "version": "1.1.0",
     "type": "library",
     "keywords": [
         "TDD",

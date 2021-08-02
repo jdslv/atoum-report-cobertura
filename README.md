@@ -1,6 +1,8 @@
 
 # jdslv/atoum-report-cobertura
 
+> Cobertura report for atoum
+
 [![GitLab](https://img.shields.io/static/v1?message=GitLab&logo=gitlab&color=grey&label=)](https://gitlab.com/jdslv/atoum-report-cobertura)
 [![Latest stable version](https://img.shields.io/packagist/v/jdslv/atoum-report-cobertura)](https://packagist.org/packages/jdslv/atoum-report-cobertura)
 [![Build status](https://gitlab.com/jdslv/atoum-report-cobertura/badges/main/pipeline.svg)](https://gitlab.com/jdslv/atoum-report-cobertura/-/pipelines)

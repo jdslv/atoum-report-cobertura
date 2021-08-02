@@ -26,18 +26,17 @@ The extension is automatically added to atoum configuration.
 Add the following code to your configuration file:
 
 ```php
-<?php
+<?php // .atoum.php
 
-// .atoum.php
-
-$cobertura = new \atoum\atoum\reports\cobertura();
-$writer = new \atoum\atoum\writers\file('./cobertura.xml');
+$cobertura = new atoum\atoum\reports\cobertura();
+$writer = new atoum\atoum\writers\file('./cobertura.xml');
 $cobertura->addWriter($writer);
 $runner->addReport($cobertura);
 ```
 
 ## License
 
-reports-extension is released under the MIT License. See the bundled [LICENSE](LICENSE) file for details.
+`jdslv/atoum-report-cobertura` is released under the MIT License.
+See the bundled [LICENSE](LICENSE) file for details.
 
 ![atoum](http://atoum.org/images/logo/atoum.png)

@@ -37,7 +37,7 @@
     },
     "require-dev": {
         "atoum/autoloop-extension": "dev-master",
-        "jdslv/atoum-xml-extension": "dev-main",
+        "jdslv/atoum-xml-extension": "^1.0",
         "satesh/phpcs-gitlab-report": "^1.0",
         "squizlabs/php_codesniffer": "^3.5"
     },

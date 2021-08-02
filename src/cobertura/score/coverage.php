@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace mageekguy\atoum\reports\cobertura\score;
+namespace atoum\atoum\reports\cobertura\score;
 
 class coverage
 {

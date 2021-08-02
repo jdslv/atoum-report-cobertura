@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace mageekguy\atoum\reports\cobertura\xml;
+namespace atoum\atoum\reports\cobertura\xml;
 
+use atoum\atoum\adapter;
+use atoum\atoum\reports\cobertura\reflection;
+use atoum\atoum\reports\cobertura\score;
 use DOMElement;
 use DOMImplementation;
-use mageekguy\atoum\adapter;
-use mageekguy\atoum\reports\cobertura\reflection;
-use mageekguy\atoum\reports\cobertura\score;
 
 class document
 {

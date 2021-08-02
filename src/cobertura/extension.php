@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace mageekguy\atoum\reports\cobertura;
+namespace atoum\atoum\reports\cobertura;
 
-use mageekguy\atoum\configurator;
-use mageekguy\atoum\reports;
+use atoum\atoum\configurator;
+use atoum\atoum\reports;
 
 class extension extends reports\extension
 {

@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace mageekguy\atoum\reports\cobertura\tests\units\reflection;
+namespace atoum\atoum\reports\cobertura\tests\units\reflection;
 
-use mageekguy\atoum;
-use mageekguy\atoum\reports\cobertura\reflection\klass as testedClass;
+use atoum;
+use atoum\atoum\reports\cobertura\reflection\klass as testedClass;
 use ReflectionClass;
 
-class klass extends atoum\test
+class klass extends atoum\atoum\test
 {
     public function testClass()
     {

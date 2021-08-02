@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace mageekguy\atoum\reports\cobertura\tests\units\score;
+namespace atoum\atoum\reports\cobertura\tests\units\score;
 
-use mageekguy\atoum;
-use mageekguy\atoum\reports\cobertura\tests\units\provider;
+use atoum;
+use atoum\atoum\reports\cobertura\tests\units\provider;
 
-class coverage extends atoum\test
+class coverage extends atoum\atoum\test
 {
     use provider;
 

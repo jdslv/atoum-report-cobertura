@@ -7,6 +7,8 @@ use atoum\atoum\reports\cobertura;
 use atoum\atoum\reports\cobertura\reflection\method as testedClass;
 use ReflectionClass;
 use ReflectionMethod;
+use ReflectionNamedType;
+use ReflectionType;
 
 class method extends atoum\atoum\test
 {
@@ -242,6 +244,37 @@ class method extends atoum\atoum\test
             ->string($this->newTestedInstance($class, 'method16')->getSignature())
                 ->startWith('class@anonymous')
                 ->endWith('::method16(callable $name)')
+        ;
+    }
+
+    /**
+     * @php 8.0
+     */
+    public function testGetShortSignature_GetSignature_php8()
+    {
+        // phpcs:disable
+        $class = new class {
+            public function method1(int|float $a) {}
+            public function method2(ReflectionNamedType|ReflectionType $a): static {}
+        };
+        // phpcs:enable
+
+        $this
+            ->assert('Method 1')
+                ->string($this->newTestedInstance($class, 'method1')->getShortSignature())
+                    ->isIdenticalTo('method1(int | float $a)')
+
+                ->string($this->newTestedInstance($class, 'method1')->getSignature())
+                    ->startWith('class@anonymous')
+                    ->endWith('::method1(int | float $a)')
+
+            ->assert('Method 2')
+                ->string($this->newTestedInstance($class, 'method2')->getShortSignature())
+                    ->isIdenticalTo('method2(ReflectionNamedType | ReflectionType $a): static')
+
+                ->string($this->newTestedInstance($class, 'method2')->getSignature())
+                    ->startWith('class@anonymous')
+                    ->endWith('::method2(ReflectionNamedType | ReflectionType $a): static')
         ;
     }
 }

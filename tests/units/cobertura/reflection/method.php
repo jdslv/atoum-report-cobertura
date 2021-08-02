@@ -253,10 +253,11 @@ class method extends atoum\atoum\test
     public function testGetShortSignature_GetSignature_php8()
     {
         // phpcs:disable
-        $class = new class {
+        // eval is used to mask the union type to other PHP version
+        $class = eval('return new class {
             public function method1(int|float $a) {}
             public function method2(ReflectionNamedType|ReflectionType $a): static {}
-        };
+        };');
         // phpcs:enable
 
         $this

@@ -1,8 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace mageekguy\atoum\reports\cobertura\reflection;
+namespace atoum\atoum\reports\cobertura\reflection;
 
 use ReflectionMethod;
+use ReflectionType;
+use ReflectionUnionType;
 
 class method extends ReflectionMethod
 {
@@ -58,6 +60,9 @@ class method extends ReflectionMethod
             $parts = [];
             $name = '';
 
+            $type = $parameter->getType();
+            $types = $type instanceof ReflectionUnionType ? $type->getTypes() : [$type];
+
             if ($parameter->isPassedByReference()) {
                 $name .= '&';
             }
@@ -69,13 +74,13 @@ class method extends ReflectionMethod
             $name .= '$' . $parameter->getName();
 
             if ($parameter->hasType()) {
-                $type = $parameter->getType();
+                $tmp = [];
 
-                if (is_object($type) && method_exists($type, 'getName')) {
-                    $parts[] = $type->getName();
-                } else {
-                    $parts[] = (string) $type;
+                foreach ($types as $type) {
+                    $tmp[] = (string) $type->getName();
                 }
+
+                $parts[] = implode(' | ', $tmp);
             }
 
             $parts[] = $name;
@@ -83,13 +88,16 @@ class method extends ReflectionMethod
             if ($parameter->isOptional() && !$parameter->isVariadic()) {
                 $parts[] = '=';
 
+                $check = function (ReflectionType $t) {
+                    return $t->getName();
+                };
                 $default = $parameter->getDefaultValue();
 
                 if ($parameter->isDefaultValueConstant()) {
                     $parts[] = $parameter->getDefaultValueConstantName();
                 } elseif ($parameter->allowsNull()) {
                     $parts[] = 'null';
-                } elseif ($parameter->isArray()) {
+                } elseif (in_array('array', array_map($check, $types), true)) {
                     $parts[] = '[]';
                 } elseif (is_bool($default)) {
                     $parts[] = $default ? 'true' : 'false';

@@ -1,11 +1,11 @@
 #! /bin/sh
 
+set -xe
+
 # We need to install dependencies only for Docker
 if [ ! -e /.dockerenv ]; then
     exit 0
 fi
-
-set -xe
 
 apt update -yqq
 apt install git zip unzip -yqq
@@ -29,3 +29,5 @@ rm composer-setup.php
 # xdebug
 pecl install xdebug
 docker-php-ext-enable xdebug
+
+echo "xdebug.mode=coverage" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini

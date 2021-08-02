@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace mageekguy\atoum\reports;
+namespace atoum\atoum\reports;
 
-use mageekguy\atoum;
-use mageekguy\atoum\reports\cobertura\reflection;
-use mageekguy\atoum\reports\cobertura\score;
-use mageekguy\atoum\reports\cobertura\xml;
+use atoum\atoum;
+use atoum\atoum\reports\cobertura\reflection;
+use atoum\atoum\reports\cobertura\score;
+use atoum\atoum\reports\cobertura\xml;
 
 class cobertura extends atoum\reports\coverage
 {

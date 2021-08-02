@@ -1,16 +1,16 @@
 <?php declare(strict_types=1);
 
-namespace atoum\reports\tests\units;
+namespace atoum\atoum\reports\tests\units;
 
-use mageekguy\atoum;
+use atoum;
 
-class cobertura extends atoum\test
+class cobertura extends atoum\atoum\test
 {
     public function testClass()
     {
         $this
             ->testedClass
-                ->extends(atoum\reports\coverage::class)
+                ->extends(atoum\atoum\reports\coverage::class)
         ;
     }
 }

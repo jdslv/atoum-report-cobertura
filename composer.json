@@ -16,7 +16,7 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "mageekguy\\atoum\\reports\\cobertura\\": "src/cobertura"
+            "atoum\\atoum\\reports\\cobertura\\": "src/cobertura"
         },
         "files": [
             "src/cobertura.php",
@@ -25,20 +25,19 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "mageekguy\\atoum\\reports\\cobertura\\tests\\units\\": "tests/units/cobertura"
+            "atoum\\atoum\\reports\\cobertura\\tests\\units\\": "tests/units/cobertura"
         }
     },
     "require": {
-        "php": ">=7.2.0",
         "ext-xdebug": "*",
         "ext-xml": "*",
-        "atoum/atoum": "^3.0",
-        "atoum/reports-extension": "^3.0"
+        "atoum/atoum": "^4.0",
+        "atoum/reports-extension": "^4.0"
     },
     "require-dev": {
-        "atoum/autoloop-extension": "^0.3",
+        "atoum/autoloop-extension": "dev-master",
+        "jdslv/atoum-xml-extension": "dev-main",
         "satesh/phpcs-gitlab-report": "^1.0",
-        "shulard/atoum-xml-extension": "^1.0",
         "squizlabs/php_codesniffer": "^3.5"
     },
     "config": {

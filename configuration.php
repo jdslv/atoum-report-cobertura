@@ -1,11 +1,11 @@
 <?php
 
-use mageekguy\atoum\configurator;
-use mageekguy\atoum\reports\cobertura;
-use mageekguy\atoum\runner;
-use mageekguy\atoum\scripts;
+use atoum\atoum\configurator;
+use atoum\atoum\reports\cobertura;
+use atoum\atoum\runner;
+use atoum\atoum\scripts;
 
-if (defined('mageekguy\atoum\scripts\runner') === true) {
+if (defined('atoum\atoum\scripts\runner') === true) {
     scripts\runner::addConfigurationCallable(function (configurator $script, runner $runner) {
         $extension = new cobertura\extension($script);
 

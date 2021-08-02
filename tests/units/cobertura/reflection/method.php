@@ -1,14 +1,16 @@
 <?php declare(strict_types=1);
 
-namespace mageekguy\atoum\reports\cobertura\tests\units\reflection;
+namespace atoum\atoum\reports\cobertura\tests\units\reflection;
 
-use mageekguy\atoum;
-use mageekguy\atoum\reports\cobertura;
-use mageekguy\atoum\reports\cobertura\reflection\method as testedClass;
+use atoum;
+use atoum\atoum\reports\cobertura;
+use atoum\atoum\reports\cobertura\reflection\method as testedClass;
 use ReflectionClass;
 use ReflectionMethod;
+use ReflectionNamedType;
+use ReflectionType;
 
-class method extends atoum\test
+class method extends atoum\atoum\test
 {
     public function testClass()
     {
@@ -133,7 +135,7 @@ class method extends atoum\test
                 ->isIdenticalTo('method11(stdObject $a): string')
 
             ->string($this->newTestedInstance($class, 'method12')->getShortSignature())
-                ->isIdenticalTo('method12(mageekguy\atoum\reports\cobertura\reflection\klass $a): ?DateTime')
+                ->isIdenticalTo('method12(atoum\atoum\reports\cobertura\reflection\klass $a): ?DateTime')
 
             ->string($this->newTestedInstance($class, 'method13')->getShortSignature())
                 ->isIdenticalTo(vsprintf('method13(%s ...$a): %s', [
@@ -222,7 +224,7 @@ class method extends atoum\test
 
             ->string($this->newTestedInstance($class, 'method12')->getSignature())
                 ->startWith('class@anonymous')
-                ->endWith('::method12(mageekguy\atoum\reports\cobertura\reflection\klass $a): ?DateTime')
+                ->endWith('::method12(atoum\atoum\reports\cobertura\reflection\klass $a): ?DateTime')
 
             ->string($this->newTestedInstance($class, 'method13')->getSignature())
                 ->startWith('class@anonymous')
@@ -242,6 +244,38 @@ class method extends atoum\test
             ->string($this->newTestedInstance($class, 'method16')->getSignature())
                 ->startWith('class@anonymous')
                 ->endWith('::method16(callable $name)')
+        ;
+    }
+
+    /**
+     * @php 8.0
+     */
+    public function testGetShortSignature_GetSignature_php8()
+    {
+        // phpcs:disable
+        // eval is used to mask the union type to other PHP version
+        $class = eval('return new class {
+            public function method1(int|float $a) {}
+            public function method2(ReflectionNamedType|ReflectionType $a): static {}
+        };');
+        // phpcs:enable
+
+        $this
+            ->assert('Method 1')
+                ->string($this->newTestedInstance($class, 'method1')->getShortSignature())
+                    ->isIdenticalTo('method1(int | float $a)')
+
+                ->string($this->newTestedInstance($class, 'method1')->getSignature())
+                    ->startWith('class@anonymous')
+                    ->endWith('::method1(int | float $a)')
+
+            ->assert('Method 2')
+                ->string($this->newTestedInstance($class, 'method2')->getShortSignature())
+                    ->isIdenticalTo('method2(ReflectionNamedType | ReflectionType $a): static')
+
+                ->string($this->newTestedInstance($class, 'method2')->getSignature())
+                    ->startWith('class@anonymous')
+                    ->endWith('::method2(ReflectionNamedType | ReflectionType $a): static')
         ;
     }
 }

@@ -9,8 +9,8 @@ $testsDir = fullPath('tests', 'units');
 
 $runner
     ->addTestsFromDirectory($testsDir)
-    ->addExtension(new mageekguy\atoum\xml\extension($script))
-    ->getExtension(mageekguy\atoum\autoloop\extension::class)
+    ->addExtension(new atoum\atoum\xml\extension($script))
+    ->getExtension(atoum\atoum\autoloop\extension::class)
         ->setWatchedFiles([$sourceDir])
 ;
 
@@ -32,9 +32,9 @@ if (extension_loaded('xdebug') === true) {
         }
 
         // HTML report
-        $coverage = new mageekguy\atoum\reports\coverage\html();
+        $coverage = new atoum\atoum\reports\coverage\html();
         $coverage
-            ->addWriter(new mageekguy\atoum\writers\std\out())
+            ->addWriter(new atoum\atoum\writers\std\out())
             ->setOutPutDirectory($path)
         ;
         $runner->addReport($coverage);
@@ -47,14 +47,14 @@ if (extension_loaded('xdebug') === true) {
             mkdir($path, 0777, true);
         }
 
-        $cobertura = new mageekguy\atoum\reports\cobertura();
-        $cobertura->addWriter(new mageekguy\atoum\writers\file($covFile));
+        $cobertura = new atoum\atoum\reports\cobertura();
+        $cobertura->addWriter(new atoum\atoum\writers\file($covFile));
         $runner->addReport($cobertura);
 
         // xunit report
         $xunitFile = fullPath('reports', 'junit.xml');
-        $xunit = new mageekguy\atoum\reports\sonar\xunit();
-        $xunit->addWriter(new mageekguy\atoum\writers\file($xunitFile));
+        $xunit = new atoum\atoum\reports\sonar\xunit();
+        $xunit->addWriter(new atoum\atoum\writers\file($xunitFile));
         $runner->addReport($xunit);
     }
 }

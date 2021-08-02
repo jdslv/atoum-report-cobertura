@@ -88,15 +88,16 @@ class method extends ReflectionMethod
             if ($parameter->isOptional() && !$parameter->isVariadic()) {
                 $parts[] = '=';
 
+                $check = function (ReflectionType $t) {
+                    return $t->getName();
+                };
                 $default = $parameter->getDefaultValue();
 
                 if ($parameter->isDefaultValueConstant()) {
                     $parts[] = $parameter->getDefaultValueConstantName();
                 } elseif ($parameter->allowsNull()) {
                     $parts[] = 'null';
-                } elseif (in_array('array', array_map(function (ReflectionType $t) {
-                    return $t->getName();
-                }, $types), true)) {
+                } elseif (in_array('array', array_map($check, $types), true)) {
                     $parts[] = '[]';
                 } elseif (is_bool($default)) {
                     $parts[] = $default ? 'true' : 'false';
